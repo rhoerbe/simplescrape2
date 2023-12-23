@@ -45,5 +45,5 @@ for script in soup.find_all("script"):
         pass
 print(i)
 
-x = Path('../results/selenium.html')
+x = Path('data/selenium.html')
 x.write_text(driver.page_source)

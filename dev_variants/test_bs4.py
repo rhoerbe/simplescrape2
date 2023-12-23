@@ -31,5 +31,5 @@ for script in soup.find_all("script"):
         pass
 print(i)
 
-x = Path('../results/bs4.html')
+x = Path('data/bs4.html')
 x.write_text(scraping_target_html)
