@@ -2,7 +2,7 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import List
+import send_chatmsg
 
 from scrape_willhaben import ScrapeWillhaben
 
@@ -22,7 +22,7 @@ def run() -> list:
     links_now = scrape_detail_links_from_target()
     save_links(links_now)
     new_urls = diff_links_not_in_prev(links_now, links_prev)
-    new_links_path.write_text('\n'.join(new_urls))
+    deliver_new_links(new_urls)
     log_new(new_urls)
     sum_log: list[str] = [str]
     sum_log.append(f"{len(links_prev)} previous and {len(links_now)} current links found")
@@ -52,6 +52,13 @@ def diff_links_not_in_prev(links_now: list, links_prev: list) -> list:
         if url not in links_prev:
             new_urls.append(url)
     return new_urls
+
+
+def deliver_new_links(new_urls):
+    new_urls_str = '\n'.join(new_urls)
+    new_links_path.write_text(new_urls_str)
+    if new_urls_str:
+        send_chatmsg.main(new_urls_str)
 
 
 def save_links(links_now: list):
