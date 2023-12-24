@@ -21,3 +21,14 @@ The best method to get search result items is to load the URLs from a JSON embed
 (reading the page and searching for filtering links requires Selenium magic to render the full page by scrolling downwards.)
 
 
+## Setup Linux
+
+install python 3.11
+on alamalinux 9/minimal `dnf install chromium`
+cd /opt
+git clone <repo>
+create + activate venv 
+pip install -r requirements.txt
+cp main_default.sh main.sh + edit env vars
+test main.sh: see if telegram message uis delivered upon detecting a diff
+setup cron for main.sh
