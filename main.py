@@ -6,7 +6,7 @@ import time
 import scrape_once
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-debug = DEBUG
+debug = os.environ('DEBUG')
 
 def main():
     # run scraper for a day (to be restarted by cron on the next day

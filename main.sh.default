@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export TELEGRAM_BOT_TOKEN=
-export TELEGRAM_CHAT_ID=
 source /opt/simplescrape2/venv/bin/activate
 export PYTHONPATH=/opt/simplescrape2
 
