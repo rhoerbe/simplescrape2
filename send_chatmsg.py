@@ -1,6 +1,9 @@
 import asyncio
 import os
-from telegram import Bot
+from dotenv import load_dotenv
+from telegram import Bot, error
+
+load_dotenv()
 
 
 def main(message: str):
@@ -12,7 +15,7 @@ async def telegram_message(message: str):
     bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
     if bot_token and chat_id:
-        print(f"bot_token={bot_token}, chat_id={chat_id}")
+        #print(f"bot_token={bot_token}, chat_id={chat_id}")
         await call_bot(bot_token, chat_id, message)
     else:
         raise Exception("Please set the TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.")

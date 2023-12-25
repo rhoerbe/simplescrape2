@@ -29,6 +29,6 @@ cd /opt
 git clone <repo>
 create + activate venv 
 pip install -r requirements.txt
-cp main_default.sh main.sh + edit env vars
+cp .env.default to .env; then edit env vars
 test main.sh: see if telegram message uis delivered upon detecting a diff
 setup cron for main.sh

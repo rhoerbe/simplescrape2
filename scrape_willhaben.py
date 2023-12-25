@@ -8,7 +8,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
-
 class ScrapeWillhaben:
     def __init__(self):
         pass
@@ -47,9 +46,19 @@ class ScrapeWillhaben:
                 item_container = json.loads(script_contents)
                 if item_container['@type'] == 'ItemList':
                     for list_item in item_container['itemListElement']:
-                        result.append(f"{scraping_target_host}/{list_item['url']}")
+                        result.append(f"{scraping_target_host}{list_item['url']}")
             except Exception:
                 pass
         return result
 
 
+if __name__ == "__main__":
+    print('starting')
+    scraping_target_host = "https://www.willhaben.at"
+    scraping_target_path = "/iad/immobilien/mietwohnungen/mietwohnung-angebote?sfId=b593acc8-1647-4ba6-adfc-1d0e51802baa&isNavigation=true&areaId=900&NO_OF_ROOMS_BUCKET=3X3&NO_OF_ROOMS_BUCKET=4X4&PROPERTY_TYPE=113&ESTATE_SIZE/LIVING_AREA_FROM=60"
+    filter_detail_link = re.compile(r'/iad/immobilien/d/mietwohnungen/wien')
+
+    scraper = ScrapeWillhaben()
+    result = scraper.scrape(scraping_target_host, scraping_target_path, filter_detail_link)
+    print('done')
+    print('\n'.join(result))

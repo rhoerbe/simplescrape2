@@ -1,14 +1,18 @@
 import json
+import os
 import re
+from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 import send_chatmsg
-
 from scrape_willhaben import ScrapeWillhaben
+
+load_dotenv()
+
 
 # Willhaben parameter
 scraping_target_host = "https://www.willhaben.at"
-scraping_target_path = "/iad/immobilien/mietwohnungen/mietwohnung-angebote?sfId=b593acc8-1647-4ba6-adfc-1d0e51802baa&isNavigation=true&areaId=900&NO_OF_ROOMS_BUCKET=3X3&NO_OF_ROOMS_BUCKET=4X4&PROPERTY_TYPE=113&ESTATE_SIZE/LIVING_AREA_FROM=60"
+scraping_target_path = os.getenv('SCRAPING_TARGET_PATH')
 filter_detail_link = re.compile(r'/iad/immobilien/d/mietwohnungen/wien')
 # Configuration
 Path('./results/').mkdir(exist_ok=True)
@@ -63,7 +67,7 @@ def deliver_new_links(new_urls):
 
 def save_links(links_now: list):
     with Path.open(prev_links_path, 'w') as fd:
-        return json.dump(links_now, fd)
+        return json.dump(links_now, fd, indent=2)
 
 
 def log_new(new_urls):

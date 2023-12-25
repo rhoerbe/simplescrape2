@@ -1,5 +1,7 @@
 .idea/
 .venv/
 __pycache__/
+.env
 dev_variants/data/
 results/
+main.sh
