@@ -18,8 +18,8 @@ def main():
     wait_until_start()
     initial_delay = random.randrange(0, 3)
     if debug:
-        intervals = (0, 3, 5)
-        initial_delay = 1
+        intervals = (0, 1, 1)
+        initial_delay = 3
     logging.info(f"scraping main loop started, initial delay = {initial_delay}s")
     time.sleep(initial_delay)
     for interval in intervals:
@@ -27,7 +27,7 @@ def main():
         sumlog = scrape_once.run()
         for line in sumlog:
             logging.info(line)
-        logging.info(f"sleeping {interval}s")
+        logging.info(f"sleeping {interval}min")
         time.sleep(interval * 60)
 
 
