@@ -3,10 +3,12 @@ import logging
 import os
 import random
 import time
+from dotenv import load_dotenv
 import scrape_once
 
+load_dotenv()
+debug = os.getenv('DEBUG')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-debug = os.environ('DEBUG')
 
 def main():
     # run scraper for a day (to be restarted by cron on the next day
@@ -16,7 +18,7 @@ def main():
     wait_until_start()
     initial_delay = random.randrange(0, 3)
     if debug:
-        intervals = (0, 1, 1, 1,)
+        intervals = (0, 3, 5)
         initial_delay = 1
     logging.info(f"scraping main loop started, initial delay = {initial_delay}s")
     time.sleep(initial_delay)
@@ -32,13 +34,14 @@ def main():
 def wait_until_start():
     while True:
         current_time = datetime.datetime.now().time()
-        if current_time.hour == os.environ('START_HOUR') and current_time.minute == os.environ('START_MINUTE'):
+        start_time = datetime.time(int(os.getenv('START_HOUR')), int(os.getenv('START_MINUTE')))
+        logging.info(f"Waiting for {start_time}.")
+        if current_time >= start_time:
             break
         else:
-            print(f"Current time is {current_time}. Waiting for 6:00...")
-            time.sleep(60)  # Wait for 60 seconds (1 minute) before checking again
+            time.sleep(60)
 
-    print("It's 6:00! Continue with the rest of the code.")
+    logging.debug("It's 6:00! Continue with the rest of the code.")
 
 if __name__ == "__main__":
     try:

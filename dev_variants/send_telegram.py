@@ -14,8 +14,8 @@ def main(message: str):
 async def telegram_message():
     # Obtain bot_token and chat_id from environment variables
     bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-    #chat_id = os.getenv('TELEGRAM_CHAT_ID')
-    chat_id = '-1002057257649' # Seach Agent Subscribers
+    chat_id = os.getenv('TELEGRAM_CHAT_ID')
+    #chat_id = '-1002057257649' # Seach Agent Subscribers
 
     if bot_token and chat_id:
         print(f"bot_token={bot_token}, chat_id={chat_id}")

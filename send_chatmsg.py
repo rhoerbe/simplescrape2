@@ -1,5 +1,6 @@
 import asyncio
 import os
+import sys
 from dotenv import load_dotenv
 from telegram import Bot, error
 
@@ -23,4 +24,7 @@ async def telegram_message(message: str):
 
 async def call_bot(bot_token, chat_id, message):
     bot = Bot(token=bot_token)
-    await bot.send_message(chat_id=chat_id, text=message)
+    try:
+        await bot.send_message(chat_id=chat_id, text=message)
+    except error.BadRequest as e:
+        print(f"\nTelegram send.message tp chat_id = {chat_id}\n{str(e)}\n", file=sys.stderr)
