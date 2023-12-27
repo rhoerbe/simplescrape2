@@ -1,5 +1,4 @@
 import json
-import re
 from datetime import datetime
 from pathlib import Path
 import send_chatmsg
@@ -21,11 +20,11 @@ def run() -> list:
     deliver_new_links(new_urls)
     log_new(new_urls)
     sum_log = []
-    sum_log.append(f"{len(links_prev)} previous and {len(links_now)} current links found")
     if len(new_urls):
         sum_log += new_urls
+        sum_log.append(f"scrape_once: {len(new_urls)} new items found")
     else:
-        sum_log.append('no new urls found')
+        sum_log.append(f"scrape_once: no new items found in {len(links_now)} scraped urls")
     return sum_log
 
 
