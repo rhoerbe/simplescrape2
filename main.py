@@ -30,6 +30,7 @@ def main():
             logging.info(f"Summary: {line}")
         logging.info(f"sleeping {interval}min")
         time.sleep(interval * 60)
+    logging.info(f"Exiting simplescrape2/main.py")
 
 
 def wait_until_start():
