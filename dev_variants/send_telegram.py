@@ -33,9 +33,5 @@ async def call_bot(bot_token, chat_id, message):
 
 
 if __name__ == "__main__":
-    # Multi-line message with HTML formatting
-    message = """
-    https://www.willhaben.at//iad/immobilien/d/mietwohnungen/wien/wien-1140-penzing/wohnung-nahe-allianz-stadion-750037868/
-        """
-
+    message = "https://www.orf.at/"
     main(message)

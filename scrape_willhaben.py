@@ -1,18 +1,28 @@
 import json
+import os
 import re
 import time
+import warnings
+from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+warnings.simplefilter("ignore", ResourceWarning)
+load_dotenv()
+
+# Willhaben parameter
+scraping_target_host = "https://www.willhaben.at"
+scraping_target_path = os.getenv('SCRAPING_TARGET_PATH')
+filter_detail_link = re.compile(r'/iad/immobilien/d/mietwohnungen/wien')
 
 class ScrapeWillhaben:
     def __init__(self):
         pass
 
-    def scrape(self, scraping_target_host: str, scraping_target_path: str, filter_detail_link: re.Pattern) -> list:
+    def scrape(self) -> list:
         # test values:
         # detail_links_regex = re.compile(r'/iad/immobilien/d/mietwohnungen/wien')
         assert scraping_target_host[-1:] != '/'

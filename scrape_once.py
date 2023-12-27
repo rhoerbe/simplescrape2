@@ -1,19 +1,11 @@
 import json
-import os
 import re
-from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 import send_chatmsg
 from scrape_willhaben import ScrapeWillhaben
 
-load_dotenv()
 
-
-# Willhaben parameter
-scraping_target_host = "https://www.willhaben.at"
-scraping_target_path = os.getenv('SCRAPING_TARGET_PATH')
-filter_detail_link = re.compile(r'/iad/immobilien/d/mietwohnungen/wien')
 # Configuration
 Path('./results/').mkdir(exist_ok=True)
 prev_links_path = Path('./results/links_prev.json')
@@ -28,7 +20,7 @@ def run() -> list:
     new_urls = diff_links_not_in_prev(links_now, links_prev)
     deliver_new_links(new_urls)
     log_new(new_urls)
-    sum_log: list[str] = [str]
+    sum_log = []
     sum_log.append(f"{len(links_prev)} previous and {len(links_now)} current links found")
     if len(new_urls):
         sum_log += new_urls
@@ -47,7 +39,7 @@ def load_detail_items_previous_run() -> list:
 
 def scrape_detail_links_from_target() -> list:
     scraper = ScrapeWillhaben()
-    return scraper.scrape(scraping_target_host, scraping_target_path, filter_detail_link)
+    return scraper.scrape()
 
 
 def diff_links_not_in_prev(links_now: list, links_prev: list) -> list:
@@ -80,4 +72,4 @@ def log_new(new_urls):
 
 # simple test
 if __name__ == "__main__":
-    run(scraping_target_host, scraping_target_path, filter_detail_link)
+    run()
