@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 # run scraper for a day (to be restarted by cron on the next day
 # if starting from 6:00, the following list would result in following times:
 # 06:00, 07:31, 08:26, 09:37, 10:24, 11:29, 12:27, 13:30, 15:15, 16:10, 17:21, 18:08, 19:13, 20:11, 21:14, 22:59, 23:54
-intervals = (91, 55, 71, 47, 65, 58, 63, 105, 55, 71, 47, 65, 58, 63, 105, 55, 71)
+intervals = (91, 55, 71, 47, 65, 58, 63, 105, 55, 71, 47, 65, 58, 63, 105, 55, 71) * 10
 initial_delay = random.randrange(0, 3)
 if debug:
     intervals = (0, 1, 1)
@@ -30,7 +30,7 @@ def main():
         for line in sumlog:
             logging.info(f"Summary: {line}")
         logging.info(f"sleeping {interval}min")
-        time.sleep(interval * 60)
+        time.sleep(interval * 6)
     logging.info(f"Exiting simplescrape2/main.py")
 
 
