@@ -29,7 +29,7 @@ def main():
         sumlog = scrape_once.run()
         for line in sumlog:
             logging.info(f"Summary: {line}")
-        logging.info(f"sleeping {interval}min")
+        logging.info(f"sleeping {interval*6} s")
         time.sleep(interval * 6)
     logging.info(f"Exiting simplescrape2/main.py")
 
